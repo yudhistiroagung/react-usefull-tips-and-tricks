@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useRef, createRef, MutableRefObject } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
 import { useDidMount, useDidUnmount } from './hooks';
+import { HideableContainer, HideableContainerType } from './components';
 
 function App() {
+  const ref = useRef<HideableContainerType>(null);
 
   useDidMount(() => {
     console.log('Component is mounted');
@@ -14,22 +17,19 @@ function App() {
     console.log('Component is unmounted');
   });
 
+  const show = (isShowing: boolean) => () => {
+    if (isShowing) return ref.current?.show();
+
+    return ref.current?.hide();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HideableContainer ref={ref}>
+        <p>THIS IS HIDEABLE</p>
+      </HideableContainer>
+      <button onClick={show(true)}>SHOW</button>
+      <button onClick={show(false)}>HIDE</button>
     </div>
   );
 }
