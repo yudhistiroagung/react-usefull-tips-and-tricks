@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { useDidMount, useDidUnmount } from './hooks';
+
 function App() {
+
+  useDidMount(() => {
+    console.log('Component is mounted');
+  });
+
+  useDidUnmount(() => {
+    console.log('Component is unmounted');
+  });
+
   return (
     <div className="App">
       <header className="App-header">
