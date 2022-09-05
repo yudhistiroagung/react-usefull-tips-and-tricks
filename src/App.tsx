@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import './App.css';
-
 
 import { useDidMount, useDidUnmount } from './hooks';
 import { HideableContainer, HideableContainerRef } from './components';
