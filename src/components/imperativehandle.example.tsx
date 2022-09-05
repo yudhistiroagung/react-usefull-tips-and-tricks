@@ -26,4 +26,4 @@ export const HideableContainer = forwardRef<Handle, Props>(({ children }, ref) =
   );
 });
 
-export type HideableContainerType = ElementRef<typeof HideableContainer>;
+export type HideableContainerRef = ElementRef<typeof HideableContainer>;

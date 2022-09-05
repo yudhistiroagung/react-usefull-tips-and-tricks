@@ -1,13 +1,12 @@
-import React, { useRef, createRef, MutableRefObject } from 'react';
-import logo from './logo.svg';
+import React, { useRef } from 'react';
 import './App.css';
 
 
 import { useDidMount, useDidUnmount } from './hooks';
-import { HideableContainer, HideableContainerType } from './components';
+import { HideableContainer, HideableContainerRef } from './components';
 
 function App() {
-  const ref = useRef<HideableContainerType>(null);
+  const ref = useRef<HideableContainerRef>(null);
 
   useDidMount(() => {
     console.log('Component is mounted');
