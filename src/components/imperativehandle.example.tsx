@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef, ReactNode, ForwardRefRenderFunction, ElementRef } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, ReactNode, ElementRef } from 'react';
 
 type Props = {
   children: ReactNode;
