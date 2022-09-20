@@ -6,7 +6,8 @@ import {
   FormLabel,
   Input,
   Button,
-  VStack
+  VStack,
+  Text
 } from '@chakra-ui/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -16,14 +17,28 @@ import {
   HideableContainer,
   HideableContainerRef
 } from './components';
+import { CounterProvider, useCounterContext } from './CounterContext';
 
 const queryClient = new QueryClient();
 
 const AppQueryClientProvider: React.JSXElementConstructor<React.PropsWithChildren<any>> = ({ children }) =>
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 
+
+const CounterButton = () => {
+  const { increment, decrement } = useCounterContext();
+
+  return (
+    <VStack spacing={2}>
+      <Button onClick={increment}>INCREMENT</Button>
+      <Button onClick={decrement}>DECREMENT</Button>
+    </VStack>
+  );
+}
+
 const Content = () => {
   const ref = useRef<HideableContainerRef>(null);
+  const { count } = useCounterContext();
 
   useDidMount(() => {
     console.log('Component is mounted');
@@ -50,6 +65,8 @@ const Content = () => {
         </HideableContainer>
         <Button onClick={show(true)}>SHOW</Button>
         <Button onClick={show(false)}>HIDE</Button>
+        <Text>{count}</Text>
+        <CounterButton />
       </VStack>
     </Container>
   );
@@ -60,7 +77,8 @@ const App = () => {
     <ComposeProvider
       components={[
         ChakraProvider,
-        AppQueryClientProvider
+        AppQueryClientProvider,
+        CounterProvider
       ]}>
       <Content />
     </ComposeProvider>

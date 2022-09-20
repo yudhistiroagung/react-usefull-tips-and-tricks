@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ProviderExoticComponent, ProviderProps } from 'react';
 
-export const createCtx = <A extends {} | null>() => {
+export const createContext = <A extends {} | null>() => {
   const ctx = React.createContext<A | undefined>({} as A);
+  const Provider = ctx.Provider as ProviderExoticComponent<ProviderProps<A>>;
 
   const useCtx = () => {
     const c = React.useContext(ctx);
@@ -11,5 +12,5 @@ export const createCtx = <A extends {} | null>() => {
     return c;
   };
 
-  return [ctx.Provider, useCtx] as const;
+  return [Provider, useCtx] as const;
 }
